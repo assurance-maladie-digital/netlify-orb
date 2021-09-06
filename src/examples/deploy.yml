@@ -1,0 +1,10 @@
+description: >
+  How to deploy a preview to Netlify.
+usage:
+  version: 2.1
+  orbs:
+    netlify: assurance-maladie-digital/netlify@1.0.0
+  workflows:
+    usage-example:
+      jobs:
+        - netlify/deploy

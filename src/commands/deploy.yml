@@ -1,0 +1,6 @@
+description: >
+  This command deploys a preview to Netlify
+steps:
+  - run:
+      name: Deploy a preview to netlify
+      command: << include(scripts/greet.sh) >>
