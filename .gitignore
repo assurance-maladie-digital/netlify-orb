@@ -1,2 +1,12 @@
-# orb.yml is "packed" from source, and not published directly from the repository.
+# Editor directories and files
+.DS_Store
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# orb.yml is "packed" from source, and not published directly from the repository
 orb.yml
