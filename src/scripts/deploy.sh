@@ -17,18 +17,18 @@ Deploy() {
     COMMIT_MESSAGE=$(curl -H "$ACCEPT" "$URL" | jq -r '.commit.message')
 
     args=(
-        "--dir=packages/docs/dist"
         "--json"
+        "--dir=packages/docs/dist" # TODO add paramter
     )
-    [[ $CIRCLE_BRANCH == "dev" ]] && args+=( "--alias=dev" )
+    [[ $CIRCLE_BRANCH == "dev" && $PROD == false ]] && args+=( "--alias=dev" )
     [[ $PROD == true ]] && args+=( "--prod" )
 
     args+=( "--message='$COMMIT_MESSAGE (#$PULL_REQUEST_ID))'" )
 
     NETLIFY_API_RESPONSE=$(./node_modules/.bin/netlify deploy "${args[@]}")
-    echo "$NETLIFY_API_RESPONSE"
+    echo "$NETLIFY_API_RESPONSE" # TODO only on debug
 
-    NETLIFY_DEPLOY_URL=$(echo "$NETLIFY_API_RESPONSE" | jq -r '.deploy_url')
+    NETLIFY_DEPLOY_URL=$(echo "$NETLIFY_API_RESPONSE" | jq -r '.deploy_url') # TODO asstert in test
     # Export target URL for use in other context (eg. GitHub Status Checks)
     echo "export TARGET_URL='$NETLIFY_DEPLOY_URL'" >> "$BASH_ENV"
 }
