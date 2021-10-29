@@ -1,6 +1,11 @@
 description: >
-  This command deploys a preview to Netlify
+  This command deploys a preview to Netlify.
+parameters:
+  folder:
+    type: string
+    default: "dist"
+    description: "The folder to deploy."
 steps:
   - run:
       name: Deploy a preview to netlify
-      command: << include(scripts/greet.sh) >>
+      command: << include(scripts/deploy.sh) >>

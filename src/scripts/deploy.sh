@@ -18,15 +18,21 @@ Deploy() {
 
     args=(
         "--json"
-        "--dir=packages/docs/dist" # TODO add paramter
+        "--dir=$FOLDER"
+        "--message='$COMMIT_MESSAGE (#$PULL_REQUEST_ID))'"
     )
-    [[ $CIRCLE_BRANCH == "dev" && $PROD == false ]] && args+=( "--alias=dev" )
-    [[ $PROD == true ]] && args+=( "--prod" )
 
-    args+=( "--message='$COMMIT_MESSAGE (#$PULL_REQUEST_ID))'" )
+    if [ "$PROD" = true ]; then
+        args+=( "--prod" )
+    elif [ "$CIRCLE_BRANCH" = "dev" ] ; then
+        args+=( "--alias=dev" )
+    fi
 
     NETLIFY_API_RESPONSE=$(./node_modules/.bin/netlify deploy "${args[@]}")
-    echo "$NETLIFY_API_RESPONSE" # TODO only on debug
+
+    if [ "$DEBUG" = true ]; then
+        echo "$NETLIFY_API_RESPONSE"
+    fi
 
     NETLIFY_DEPLOY_URL=$(echo "$NETLIFY_API_RESPONSE" | jq -r '.deploy_url') # TODO asstert in test
     # Export target URL for use in other context (eg. GitHub Status Checks)

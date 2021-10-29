@@ -46,7 +46,7 @@ workflows:
           path: ./src/tests
       # Publish development version(s) of the orb.
       - orb-tools/publish-dev:
-          orb-name: assurance-maladie-digital/netlify-deploy-orb
+          orb-name: assurance-maladie-digital/netlify-orb
           context: orb-publishing # A restricted context containing your private publishing credentials. Will only execute if approved by an authorized user.
           requires:
             - orb-tools/lint
@@ -77,7 +77,7 @@ workflows:
       # be skipped.
       # e.g. [semver:patch] will cause a patch version to be published.
       - orb-tools/dev-promote-prod-from-commit-subject:
-          orb-name: assurance-maladie-digital/netlify-deploy-orb
+          orb-name: assurance-maladie-digital/netlify-orb
           context: orb-publishing
           add-pr-comment: false
           fail-if-semver-not-indicated: true

@@ -4,4 +4,4 @@ description: >
   Netlify deployment
 
 display:
-  source_url: "https://www.github.com/assurance-maladie-digital/netlify-deploy-orb"
+  source_url: "https://www.github.com/assurance-maladie-digital/netlify-orb"
