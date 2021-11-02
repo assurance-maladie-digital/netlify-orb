@@ -8,7 +8,7 @@ parameters:
   alias:
     type: string
     default: ""
-    description: "A custom to deploy to."
+    description: "A custom alias for deployment."
 steps:
   - run:
       name: Deploy a preview to netlify

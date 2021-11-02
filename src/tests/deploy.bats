@@ -24,7 +24,6 @@ LOGS='"logs": "https://example.com/deploys/id"'
 
     result=$(echo $(Deploy)|tr -d '\n')
 
-    # Validate the body
     [ "$result" == '{ "dir": "--dir='"$FOLDER"'", '"$COMMON_DATA"', "deploy_url": "https://example.com/id", '"$LOGS"' }' ]
 }
 
@@ -34,7 +33,6 @@ LOGS='"logs": "https://example.com/deploys/id"'
 
     result=$(echo $(Deploy)|tr -d '\n')
 
-    # Validate the body
     [ "$result" == '{ "dir": "--dir='"$FOLDER"'", '"$COMMON_DATA"', "deploy_url": "https://dev--example.com", '"$LOGS"' }' ]
 }
 
@@ -45,7 +43,6 @@ LOGS='"logs": "https://example.com/deploys/id"'
 
     result=$(echo $(Deploy)|tr -d '\n')
 
-    # Validate the body
     [ "$result" == '{ "dir": "--dir='"$FOLDER"'", '"$COMMON_DATA"', "deploy_url": "https://rct--example.com", '"$LOGS"' }' ]
 }
 
@@ -55,6 +52,5 @@ LOGS='"logs": "https://example.com/deploys/id"'
 
     result=$(echo $(Deploy)|tr -d '\n')
 
-    # Validate the body
     [ "$result" == '{ "dir": "--dir='"$FOLDER"'", '"$COMMON_DATA"', "deploy_url": "https://example.com", '"$LOGS"' }' ]
 }

@@ -1,0 +1,11 @@
+description: >
+  This command deploys to Netlify in production mode.
+parameters:
+  folder:
+    type: string
+    default: "dist"
+    description: "The folder to deploy."
+steps:
+  - deploy:
+      prod: true
+      folder: << parameters.folder >>
