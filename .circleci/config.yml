@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  netlify-deploy: assurance-maladie-digital/netlify-deploy@<< pipeline.parameters.dev-orb-version >>
+  netlify: assurance-maladie-digital/netlify@<< pipeline.parameters.dev-orb-version >>
   orb-tools: circleci/orb-tools@10.0
   bats: circleci/bats@1.0
   shellcheck: circleci/shellcheck@2.0
@@ -28,7 +28,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      - netlify-deploy/deploy
+      - netlify/deploy
 
 workflows:
   # Prior to producing a development orb (which requires credentials) basic validation, linting, and even unit testing can be performed.
