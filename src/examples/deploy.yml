@@ -4,7 +4,30 @@ usage:
   version: 2.1
   orbs:
     netlify: assurance-maladie-digital/netlify@1.0.0
+  jobs:
+    deploy-preview:
+      docker:
+        - image: cimg/base
+      steps:
+        - run: echo "Example"
+        - netlify/deploy
+    deploy-preview-folder:
+      docker:
+        - image: cimg/base
+      steps:
+        - run: echo "Example"
+        - netlify/deploy:
+            folder: packages/docs/dist
+    deploy-preview-alias:
+      docker:
+        - image: cimg/base
+      steps:
+        - run: echo "Example"
+        - netlify/deploy:
+            alias: rct
   workflows:
     usage-example:
       jobs:
-        - netlify/deploy
+        - deploy-preview
+        - deploy-preview-folder
+        - deploy-preview-alias
