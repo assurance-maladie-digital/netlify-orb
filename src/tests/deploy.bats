@@ -39,7 +39,6 @@ GetExpectedResponse() {
 @test '2: Deploys to Netlify on dev mode' {
     export CIRCLE_BRANCH="dev"
     export PROD="false"
-    export DEBUG="true"
 
     result=$(echo $(Deploy)|tr -d '\n')
     expected_result=$(GetExpectedResponse "https://dev--example.com")
