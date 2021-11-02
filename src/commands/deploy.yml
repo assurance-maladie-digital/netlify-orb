@@ -5,6 +5,10 @@ parameters:
     type: string
     default: "dist"
     description: "The folder to deploy."
+  alias:
+    type: string
+    default: ""
+    description: "A custom to deploy to."
 steps:
   - run:
       name: Deploy a preview to netlify

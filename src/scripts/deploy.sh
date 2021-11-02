@@ -19,11 +19,13 @@ Deploy() {
     args=(
         "--json"
         "--dir=$FOLDER"
-        "--message='$COMMIT_MESSAGE (#$PULL_REQUEST_ID))'"
+        "--message='$COMMIT_MESSAGE (#$PULL_REQUEST_ID)'"
     )
 
     if [ "$PROD" = true ]; then
         args+=( "--prod" )
+    elif [ -n "$ALIAS" ] ; then
+        args+=( "--alias=$ALIAS" )
     elif [ "$CIRCLE_BRANCH" = "dev" ] ; then
         args+=( "--alias=dev" )
     fi
@@ -34,7 +36,8 @@ Deploy() {
         echo "$NETLIFY_API_RESPONSE"
     fi
 
-    NETLIFY_DEPLOY_URL=$(echo "$NETLIFY_API_RESPONSE" | jq -r '.deploy_url') # TODO asstert in test
+    NETLIFY_DEPLOY_URL=$(echo "$NETLIFY_API_RESPONSE" | jq -r '.deploy_url')
+
     # Export target URL for use in other context (eg. GitHub Status Checks)
     echo "export TARGET_URL='$NETLIFY_DEPLOY_URL'" >> "$BASH_ENV"
 }
