@@ -6,6 +6,7 @@ parameters:
     default: "dist"
     description: "The folder to deploy."
 steps:
-  - deploy:
-      prod: true
-      folder: << parameters.folder >>
+  - run:
+      environment:
+        PROD: true
+      command: << include(scripts/deploy.sh) >>
