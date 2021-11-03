@@ -1,6 +1,9 @@
 #!/bin/sh
 
 Deploy() {
+    [ -n "${DEV_BRANCH}" ] || DEV_BRANCH="dev"
+    [ -n "${MAIN_BRANCH}" ] || MAIN_BRANCH="main"
+
     # Use sed to retreive the PR id after the last /
     # shellcheck disable=SC2001
     PULL_REQUEST_ID=$(echo "$CIRCLE_PULL_REQUEST" | sed 's?.*/??')
