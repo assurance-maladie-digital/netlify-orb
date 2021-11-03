@@ -1,6 +1,9 @@
 #!/bin/sh
 
 Deploy() {
+    [ -n "${DEV_BRANCH}" ] || DEV_BRANCH="dev"
+    [ -n "${MAIN_BRANCH}" ] || MAIN_BRANCH="main"
+
     # Use sed to retreive the PR id after the last /
     # shellcheck disable=SC2001
     PULL_REQUEST_ID=$(echo "$CIRCLE_PULL_REQUEST" | sed 's?.*/??')
@@ -26,7 +29,9 @@ Deploy() {
         args+=( "--prod" )
     elif [ -n "$ALIAS" ] ; then
         args+=( "--alias=$ALIAS" )
-    elif [ "$CIRCLE_BRANCH" = "dev" ] ; then
+    elif [ "$CIRCLE_BRANCH" = "$MAIN_BRANCH" ] ; then
+        args+=( "--alias=preprod" )
+    elif [ "$CIRCLE_BRANCH" = "$DEV_BRANCH" ] ; then
         args+=( "--alias=dev" )
     fi
 

@@ -14,17 +14,24 @@ export CIRCLE_SHA1="example"
 export FOLDER="dist/"
 export DEBUG="true"
 
-MESSAGE="'Commit message (#$PULL_REQUEST_ID)'"
-COMMON_DATA='"message": "--message='"$MESSAGE"'", "site_name": "test", "deploy_id": "id"'
-LOGS='"logs": "https://example.com/deploys/id"'
+GetExpectedResponse() {
+    MESSAGE="'Commit message (#$PULL_REQUEST_ID)'"
+    COMMON_DATA='"message": "--message='"$MESSAGE"'", "site_name": "test", "deploy_id": "id"'
+    LOGS='"logs": "https://example.com/deploys/id"'
+
+    DEPLOY_URL=$1
+
+    echo '{ "dir": "--dir='"$FOLDER"'", '"$COMMON_DATA"', "deploy_url": "'"$DEPLOY_URL"'", '"$LOGS"' }'
+}
 
 @test '1: Deploys to Netlify' {
     export CIRCLE_BRANCH="feature"
     export PROD="false"
 
     result=$(echo $(Deploy)|tr -d '\n')
+    expected_result=$(GetExpectedResponse "https://example.com/id")
 
-    [ "$result" == '{ "dir": "--dir='"$FOLDER"'", '"$COMMON_DATA"', "deploy_url": "https://example.com/id", '"$LOGS"' }' ]
+    [ "$result" == "$expected_result" ]
 }
 
 @test '2: Deploys to Netlify on dev mode' {
@@ -32,25 +39,60 @@ LOGS='"logs": "https://example.com/deploys/id"'
     export PROD="false"
 
     result=$(echo $(Deploy)|tr -d '\n')
+    expected_result=$(GetExpectedResponse "https://dev--example.com")
 
-    [ "$result" == '{ "dir": "--dir='"$FOLDER"'", '"$COMMON_DATA"', "deploy_url": "https://dev--example.com", '"$LOGS"' }' ]
+    [ "$result" == "$expected_result" ]
 }
 
-@test '3: Deploys to Netlify with a custom alias' {
+@test '3: Deploys to Netlify on dev mode with a specific branch' {
+    export DEV_BRANCH="developement"
+    export CIRCLE_BRANCH="developement"
+    export PROD="false"
+
+    result=$(echo $(Deploy)|tr -d '\n')
+    expected_result=$(GetExpectedResponse "https://dev--example.com")
+
+    [ "$result" == "$expected_result" ]
+}
+
+@test '4: Deploys to Netlify on preprod mode' {
+    export CIRCLE_BRANCH="main"
+    export PROD="false"
+
+    result=$(echo $(Deploy)|tr -d '\n')
+    expected_result=$(GetExpectedResponse "https://preprod--example.com")
+
+    [ "$result" == "$expected_result" ]
+}
+
+@test '5: Deploys to Netlify on preprod mode with a specific branch' {
+    export MAIN_BRANCH="master"
+    export CIRCLE_BRANCH="master"
+    export PROD="false"
+
+    result=$(echo $(Deploy)|tr -d '\n')
+    expected_result=$(GetExpectedResponse "https://preprod--example.com")
+
+    [ "$result" == "$expected_result" ]
+}
+
+@test '6: Deploys to Netlify in production mode' {
+    export CIRCLE_BRANCH="main"
+    export PROD="true"
+
+    result=$(echo $(Deploy)|tr -d '\n')
+    expected_result=$(GetExpectedResponse "https://example.com")
+
+    [ "$result" == "$expected_result" ]
+}
+
+@test '7: Deploys to Netlify with a custom alias' {
     export CIRCLE_BRANCH="dev" # A custom alias overrides the default behavior
     export ALIAS="rct"
     export PROD="false"
 
     result=$(echo $(Deploy)|tr -d '\n')
+    expected_result=$(GetExpectedResponse "https://rct--example.com")
 
-    [ "$result" == '{ "dir": "--dir='"$FOLDER"'", '"$COMMON_DATA"', "deploy_url": "https://rct--example.com", '"$LOGS"' }' ]
-}
-
-@test '4: Deploys to Netlify in production mode' {
-    export CIRCLE_BRANCH="main"
-    export PROD="true"
-
-    result=$(echo $(Deploy)|tr -d '\n')
-
-    [ "$result" == '{ "dir": "--dir='"$FOLDER"'", '"$COMMON_DATA"', "deploy_url": "https://example.com", '"$LOGS"' }' ]
+    [ "$result" == "$expected_result" ]
 }
