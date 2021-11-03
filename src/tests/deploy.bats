@@ -12,6 +12,8 @@ export CIRCLE_PROJECT_REPONAME="test"
 export CIRCLE_SHA1="example"
 
 export FOLDER="dist/"
+export DEV_BRANCH="dev"
+export MAIN_BRANCH="main"
 export DEBUG="true"
 
 GetExpectedResponse() {

@@ -25,9 +25,17 @@ usage:
         - run: echo "Example"
         - netlify/deploy:
             alias: rct
+    deploy-preview-custom-branch:
+      docker:
+        - image: cimg/base
+      steps:
+        - run: echo "Example"
+        - netlify/deploy:
+            dev_branch: development
   workflows:
     usage-example:
       jobs:
         - deploy-preview
         - deploy-preview-folder
         - deploy-preview-alias
+        - deploy-preview-custom-branch

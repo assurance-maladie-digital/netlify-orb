@@ -5,6 +5,14 @@ parameters:
     type: string
     default: "dist"
     description: "The folder to deploy."
+  dev_branch:
+    type: string
+    default: dev
+    description: Your development branch.
+  main_branch:
+    type: string
+    default: main
+    description: Your main branch.
 steps:
   - run:
       environment:

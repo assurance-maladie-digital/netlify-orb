@@ -9,6 +9,14 @@ parameters:
     type: string
     default: ""
     description: "A custom alias for deployment."
+  dev_branch:
+    type: string
+    default: dev
+    description: Your development branch.
+  main_branch:
+    type: string
+    default: main
+    description: Your main branch.
 steps:
   - run:
       name: Deploy a preview to netlify
