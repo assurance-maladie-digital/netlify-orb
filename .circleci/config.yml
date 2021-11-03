@@ -27,7 +27,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       # The orb relies on external services, we won't test those in integration tests
-      - exit 0
+      - run: exit 0
 
 workflows:
   # Prior to producing a development orb (which requires credentials) basic validation, linting, and even unit testing can be performed.
