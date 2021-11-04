@@ -19,5 +19,5 @@ parameters:
     description: Your main branch.
 steps:
   - run:
-      name: Deploy a preview to netlify
+      name: Deploy a preview to Netlify
       command: << include(scripts/deploy.sh) >>

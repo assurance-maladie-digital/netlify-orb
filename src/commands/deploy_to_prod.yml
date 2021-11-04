@@ -15,6 +15,7 @@ parameters:
     description: Your main branch.
 steps:
   - run:
+      name: Deploy to Netlify in production mode
       environment:
         PROD: true
       command: << include(scripts/deploy.sh) >>
