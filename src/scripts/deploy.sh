@@ -22,7 +22,7 @@ Deploy() {
         "--message='$COMMIT_MESSAGE (#$PULL_REQUEST_ID)'"
     )
 
-    if [ "$PROD" = true ]; then
+    if [ "$PROD" = 1 ]; then
         args+=( "--prod" )
     elif [ -n "$ALIAS" ]; then
         args+=( "--alias=$ALIAS" )
