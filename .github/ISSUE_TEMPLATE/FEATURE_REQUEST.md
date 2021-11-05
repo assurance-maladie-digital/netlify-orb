@@ -1,14 +1,13 @@
 ---
-name: "\U0001F680 Feature Request"
+name: "Feature Request"
 about: Propose changes to the orb.
 title: ''
 labels: feature_request
 assignees: ''
 ---
 
-## Describe Request:
+## Describe Request
 
-## Examples:
+## Examples
 
-## Supporting Documentation Links:
-
+## Supporting Documentation Links

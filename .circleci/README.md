@@ -1,8 +1,8 @@
 # Orb Development Pipeline
 
-This configuration file uses [orb-tools orb]() version 10 to automatically _pack_, _test_, and _publish_ CircleCI orbs using this project structure. View the comments within the config file for a full break  down
+This configuration file uses [orb-tools orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools) version 10 to automatically _pack_, _test_, and _publish_ CircleCI orbs using this project structure. View the comments within the config file for a full break down.
 
-## Overview:
+## Overview
 
 **Imported Orbs**
 
@@ -24,10 +24,10 @@ This Workflow will be placed on _hold_ prior to publishing a new development ver
 
 This allows users to fork the orb repository and begin the pipeline, while the code-owners review that the code is safe to test in an environment where publishing keys will be present.
 
-Once approved, the development version of the orb will publish and the _trigger-integration-tests-workflow_ job will run, kicking off the next workflow
+Once approved, the development version of the orb will publish and the _trigger-integration-tests-workflow_ job will run, kicking off the next workflow.
 
 **integration-test_deploy**
 
 The second and final workflow is manually triggered by the _trigger-integration-tests-workflow_ job. In this run, the development version of the orb that was just published will be imported, and the integration tests will run.
 
-When running on the `master` branch (after merging to `master`), the workflow will additionally publish your new production orb.
+When running on the `main` branch (after merging to `main`), the workflow will additionally publish your new production orb.

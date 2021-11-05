@@ -1,0 +1,33 @@
+description: >
+  How to deploy to Netlify in production.
+usage:
+  version: 2.1
+  orbs:
+    netlify: assurance-maladie-digital/netlify@1.0.0
+  jobs:
+    deploy-to-prod:
+      docker:
+        - image: cimg/base
+      steps:
+        - run: echo "Example"
+        - netlify/deploy_to_prod
+    deploy-to-prod-folder:
+      docker:
+        - image: cimg/base
+      steps:
+        - run: echo "Example"
+        - netlify/deploy_to_prod:
+            folder: packages/docs/dist
+    deploy-custom-branch:
+      docker:
+        - image: cimg/base
+      steps:
+        - run: echo "Example"
+        - netlify/deploy:
+            main_branch: master
+  workflows:
+    usage-example:
+      jobs:
+        - deploy-to-prod
+        - deploy-to-prod-folder
+        - deploy-custom-branch

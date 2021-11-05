@@ -1,0 +1,27 @@
+description: >
+  This command deploys a preview to Netlify.
+parameters:
+  folder:
+    type: string
+    default: "dist"
+    description: "The folder to deploy."
+  alias:
+    type: string
+    default: ""
+    description: "A custom alias for deployment."
+  dev_branch:
+    type: string
+    default: dev
+    description: Your development branch.
+  main_branch:
+    type: string
+    default: main
+    description: Your main branch.
+steps:
+  - run:
+      name: Deploy a preview to Netlify
+      environment:
+        FOLDER: << parameters.folder >>
+        DEV_BRANCH: << parameters.dev_branch >>
+        MAIN_BRANCH: << parameters.main_branch >>
+      command: << include(scripts/deploy.sh) >>
