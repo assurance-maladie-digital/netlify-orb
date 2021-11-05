@@ -20,4 +20,8 @@ parameters:
 steps:
   - run:
       name: Deploy a preview to Netlify
+      environment:
+        FOLDER: << parameters.folder >>
+        DEV_BRANCH: << parameters.dev_branch >>
+        MAIN_BRANCH: << parameters.main_branch >>
       command: << include(scripts/deploy.sh) >>

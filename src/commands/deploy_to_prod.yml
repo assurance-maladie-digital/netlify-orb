@@ -17,5 +17,8 @@ steps:
   - run:
       name: Deploy to Netlify in production mode
       environment:
+        FOLDER: << parameters.folder >>
+        DEV_BRANCH: << parameters.dev_branch >>
+        MAIN_BRANCH: << parameters.main_branch >>
         PROD: true
       command: << include(scripts/deploy.sh) >>
