@@ -46,7 +46,13 @@ Deploy() {
         echo "$NETLIFY_API_RESPONSE"
     fi
 
-    NETLIFY_DEPLOY_URL=$(echo "$NETLIFY_API_RESPONSE" | jq -r '.deploy_url')
+    if [ "$PROD" = 1 ]; then
+        URL_PARAM=".url"
+    else
+        URL_PARAM=".deploy_url"
+    fi
+
+    NETLIFY_DEPLOY_URL=$(echo "$NETLIFY_API_RESPONSE" | jq -r "$URL_PARAM")
 
     # Export deploy URL for use in other context (eg. GitHub Status Checks)
     echo "export NETLIFY_DEPLOY_URL='$NETLIFY_DEPLOY_URL'" >> "$BASH_ENV"
