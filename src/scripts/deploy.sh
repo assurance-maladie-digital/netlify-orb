@@ -24,12 +24,20 @@ Deploy() {
 
     if [ "$PROD" = true ]; then
         args+=( "--prod" )
-    elif [ -n "$ALIAS" ] ; then
+    elif [ -n "$ALIAS" ]; then
         args+=( "--alias=$ALIAS" )
-    elif [ "$CIRCLE_BRANCH" = "$MAIN_BRANCH" ] ; then
+    elif [ "$CIRCLE_BRANCH" = "$MAIN_BRANCH" ]; then
         args+=( "--alias=preprod" )
-    elif [ "$CIRCLE_BRANCH" = "$DEV_BRANCH" ] ; then
+    elif [ "$CIRCLE_BRANCH" = "$DEV_BRANCH" ]; then
         args+=( "--alias=dev" )
+    fi
+
+    if [ "$DEBUG" = true ]; then
+        echo "prod: $PROD"
+        echo "alias: $ALIAS"
+        echo "main_branch: $MAIN_BRANCH"
+        echo "dev_branch: $DEV_BRANCH"
+        echo "${args[@]}"
     fi
 
     NETLIFY_API_RESPONSE=$(./node_modules/.bin/netlify deploy "${args[@]}")
