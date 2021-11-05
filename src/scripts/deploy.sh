@@ -48,8 +48,8 @@ Deploy() {
 
     NETLIFY_DEPLOY_URL=$(echo "$NETLIFY_API_RESPONSE" | jq -r '.deploy_url')
 
-    # Export target URL for use in other context (eg. GitHub Status Checks)
-    echo "export TARGET_URL='$NETLIFY_DEPLOY_URL'" >> "$BASH_ENV"
+    # Export deploy URL for use in other context (eg. GitHub Status Checks)
+    echo "export NETLIFY_DEPLOY_URL='$NETLIFY_DEPLOY_URL'" >> "$BASH_ENV"
 }
 
 # Will not run if sourced for bats-core tests
