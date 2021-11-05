@@ -44,7 +44,7 @@ if [[ "$_" == "$0" ]]; then
 fi
 ```
 
-We want our script to execute when running in our CI environment or locally, but we don't want to execute our script if we are testing it. In the case of testing, we only want to source the functions within our script,t his allows us to mock inputs and test individual functions.
+We want our script to execute when running in our CI environment or locally, but we don't want to execute our script if we are testing it. In the case of testing, we only want to source the functions within our script, this allows us to mock inputs and test individual functions.
 
 **A POSIX Compliant Source Checking Method**
 

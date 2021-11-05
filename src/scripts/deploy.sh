@@ -32,11 +32,11 @@ Deploy() {
         args+=( "--alias=dev" )
     fi
 
-    if [ "$DEBUG" = true ]; then
-        echo "prod: $PROD"
-        echo "alias: $ALIAS"
-        echo "main_branch: $MAIN_BRANCH"
-        echo "dev_branch: $DEV_BRANCH"
+    if [ "$DEBUG" = true ] && [ "${0#*"$ORB_TEST_ENV"}" = "$0" ]; then
+        echo "prod=$PROD;"
+        echo "alias=$ALIAS;"
+        echo "main_branch=$MAIN_BRANCH;"
+        echo "dev_branch=$DEV_BRANCH;"
         echo "${args[@]}"
     fi
 

@@ -89,7 +89,8 @@ GetExpectedResponse() {
 }
 
 @test '7: Deploys to Netlify with a custom alias' {
-    export CIRCLE_BRANCH="dev" # A custom alias overrides the default behavior
+    # A custom alias overrides the default behavior
+    export CIRCLE_BRANCH="dev"
     export ALIAS="rct"
     export PROD="false"
 
