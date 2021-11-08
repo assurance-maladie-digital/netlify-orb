@@ -12,11 +12,15 @@ parameters:
   dev_branch:
     type: string
     default: dev
-    description: Your development branch.
+    description: "Your development branch."
   main_branch:
     type: string
     default: main
-    description: Your main branch.
+    description: "Your main branch."
+  command_path:
+    type: string
+    default: "./node_modules/.bin/netlify"
+    description: "The path to the Netlify executable."
 steps:
   - run:
       name: Deploy a preview to Netlify
@@ -24,4 +28,5 @@ steps:
         FOLDER: << parameters.folder >>
         DEV_BRANCH: << parameters.dev_branch >>
         MAIN_BRANCH: << parameters.main_branch >>
+        COMMAND_PATH: << parameters.command_path >>
       command: << include(scripts/deploy.sh) >>

@@ -40,7 +40,7 @@ Deploy() {
         echo "${args[@]}"
     fi
 
-    NETLIFY_API_RESPONSE=$(./node_modules/.bin/netlify deploy "${args[@]}")
+    NETLIFY_API_RESPONSE=$($COMMAND_PATH deploy "${args[@]}")
 
     if [ "$DEBUG" = true ]; then
         echo "$NETLIFY_API_RESPONSE"
