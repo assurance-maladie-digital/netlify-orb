@@ -14,6 +14,7 @@ export CIRCLE_SHA1="example"
 export FOLDER="dist/"
 export DEV_BRANCH="dev"
 export MAIN_BRANCH="main"
+export COMMAND_PATH="./node_modules/.bin/netlify"
 export DEBUG="true"
 
 GetExpectedResponse() {
@@ -99,3 +100,15 @@ GetExpectedResponse() {
 
     [ "$result" == "$expected_result" ]
 }
+
+@test '8: Deploys to Netlify with a custom command path' {
+    export CIRCLE_BRANCH="feature"
+    export PROD="false"
+    export COMMAND_PATH="netlify"
+
+    result=$(echo $(Deploy)|tr -d '\n')
+    expected_result=$(GetExpectedResponse "https://example.com/id")
+
+    [ "$result" == "$expected_result" ]
+}
+

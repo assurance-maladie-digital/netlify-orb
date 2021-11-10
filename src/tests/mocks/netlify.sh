@@ -1,5 +1,5 @@
 # Mock Netlify CLI to return only the body
-function ./node_modules/.bin/netlify() {
+function netlify() {
     # The command will be called with these parameters:
     # --json --dir="$DIR" --message="$MESSAGE" [--alias="$ALIAS"] [--prod]
     DIR=$3
@@ -34,4 +34,8 @@ function ./node_modules/.bin/netlify() {
     response+=( '"logs": "https://example.com/deploys/id"' )
 
     echo "{ ${response[@]} }"
+}
+
+function ./node_modules/.bin/netlify() {
+    netlify "$@"
 }
